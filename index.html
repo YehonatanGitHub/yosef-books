@@ -14,6 +14,7 @@
       --accent-soft: #ccfbf1;
       --border: #e7e0d4;
       --read: #166534;
+      --danger: #b91c1c;
       --shadow: 0 1px 2px rgba(28, 25, 23, 0.06), 0 8px 24px rgba(28, 25, 23, 0.06);
       --radius: 14px;
       --safe-b: env(safe-area-inset-bottom, 0px);
@@ -76,18 +77,19 @@
       display: grid;
       gap: 0.55rem;
     }
-    .search {
+    .search, .text-input, .comment {
       width: 100%;
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 0.75rem 0.9rem;
       font-size: 1rem;
-      background: var(--card);
+      font-family: inherit;
+      background: #fff;
       color: var(--ink);
       outline: none;
       box-shadow: var(--shadow);
     }
-    .search:focus {
+    .search:focus, .text-input:focus, .comment:focus {
       border-color: var(--accent);
       box-shadow: 0 0 0 3px var(--accent-soft);
     }
@@ -96,7 +98,7 @@
       gap: 0.4rem;
       flex-wrap: wrap;
     }
-    .filters button {
+    .filters button, .add-form button {
       appearance: none;
       border: 1px solid var(--border);
       background: var(--card);
@@ -107,11 +109,48 @@
       cursor: pointer;
       font-family: inherit;
     }
-    .filters button[aria-pressed="true"] {
+    .filters button[aria-pressed="true"], .add-form button {
       background: var(--accent);
       border-color: var(--accent);
       color: #fff;
     }
+    .add-form button {
+      border-radius: 12px;
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+    }
+    .add-form button:disabled {
+      opacity: 0.55;
+      cursor: default;
+    }
+    .add-panel {
+      margin-top: 1rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.9rem;
+      box-shadow: var(--shadow);
+    }
+    .add-panel h2 {
+      margin: 0 0 0.65rem;
+      font-size: 1.05rem;
+    }
+    .add-form {
+      display: grid;
+      gap: 0.45rem;
+    }
+    @media (min-width: 640px) {
+      .add-form {
+        grid-template-columns: 1fr 1fr auto;
+        align-items: stretch;
+      }
+    }
+    .form-msg {
+      margin: 0.45rem 0 0;
+      font-size: 0.85rem;
+    }
+    .form-msg.error { color: var(--danger); }
+    .form-msg.ok { color: var(--read); }
     .author-block {
       margin-top: 1.35rem;
     }
@@ -145,24 +184,50 @@
       border-radius: var(--radius);
       padding: 0.8rem 0.9rem;
       box-shadow: var(--shadow);
+      scroll-margin-top: calc(var(--header-h, 16rem) + 12px);
       transition: opacity 0.15s ease, border-color 0.15s ease;
     }
     .book.read {
       border-color: color-mix(in srgb, var(--read) 35%, var(--border));
       background: color-mix(in srgb, #dcfce7 35%, var(--card));
     }
-    .book label {
-      display: block;
-      cursor: pointer;
+    .book-body {
+      min-width: 0;
+      display: grid;
+      gap: 0.45rem;
     }
+    .title-label { cursor: pointer; }
     .book .title {
       font-weight: 600;
       font-size: 1.02rem;
+      overflow-wrap: anywhere;
     }
     .book .notes {
-      margin-top: 0.2rem;
       font-size: 0.8rem;
       color: var(--muted);
+    }
+    .checked-on {
+      font-size: 0.82rem;
+      color: var(--read);
+      font-weight: 600;
+    }
+    .field {
+      display: grid;
+      gap: 0.2rem;
+    }
+    .field > span {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    .author-input {
+      box-shadow: none;
+      padding: 0.5rem 0.7rem;
+    }
+    .comment {
+      min-height: 4.4rem;
+      resize: vertical;
+      box-shadow: none;
+      line-height: 1.4;
     }
     .check {
       width: 1.35rem;
@@ -194,10 +259,10 @@
   <div class="wrap">
     <header>
       <h1>ספרים ליוסף</h1>
-      <p class="sub">סמנו ספרים שכבר נקראו · נשמר במכשיר הזה</p>
+      <p class="sub">סמנו ספרים, כתבו מחשבות, והוסיפו כותרים · נשמר במכשיר הזה</p>
       <div class="stats" id="stats"></div>
       <div class="controls">
-        <input class="search" id="search" type="search" placeholder="חיפוש לפי שם ספר או סופר…" autocomplete="off" />
+        <input class="search" id="search" type="search" placeholder="חיפוש לפי שם ספר, סופר או הערה…" autocomplete="off" />
         <div class="filters" role="group" aria-label="סינון">
           <button type="button" data-filter="all" aria-pressed="true">הכול</button>
           <button type="button" data-filter="unread" aria-pressed="false">עדיין לא נקרא</button>
@@ -206,18 +271,30 @@
       </div>
     </header>
 
+    <section class="add-panel" aria-labelledby="add-heading">
+      <h2 id="add-heading">הוספת ספר</h2>
+      <form id="add-form" class="add-form" novalidate>
+        <input class="text-input" id="new-title" name="title" type="text" placeholder="שם הספר" autocomplete="off" aria-label="שם הספר" />
+        <input class="text-input" id="new-author" name="author" type="text" placeholder="סופר (לא חובה)" autocomplete="off" aria-label="סופר (לא חובה)" />
+        <button type="submit" id="add-button" disabled>הוסף</button>
+      </form>
+      <p class="form-msg hidden" id="add-msg" role="status"></p>
+    </section>
+
     <main id="main"></main>
     <p class="empty hidden" id="empty">אין ספרים שמתאימים לחיפוש או לסינון.</p>
     <footer>
       מקורות: <a href="https://www.helt.co.il/12_6.htm" target="_blank" rel="noopener">helt.co.il</a>,
       <a href="https://he.wikipedia.org/wiki/%D7%A9%D7%9E%D7%95%D7%90%D7%9C_%D7%90%D7%A8%D7%92%D7%9E%D7%9F" target="_blank" rel="noopener">ויקיפדיה · ארגמן</a>,
       <a href="https://he.wikipedia.org/wiki/%D7%90%D7%95%D7%A8%D7%94_%D7%9E%D7%95%D7%A8%D7%92" target="_blank" rel="noopener">ויקיפדיה · מורג</a>
-      · רק כותרים שאומתו ממקורות אלה
+      · רק כותרים שאומתו ממקורות אלה. ספרים והערות שנוספו נשמרים במכשיר.
     </footer>
   </div>
 
   <script>
-    const STORAGE_KEY = "yosef-books-read-v1";
+    const STORAGE_KEY = "yosef-books-state-v2";
+    const LEGACY_READ_KEY = "yosef-books-read-v1";
+    const UNCHECK_CONFIRM = "האם אתה בטוח שברצונך לבטל את הסימון של הספר?";
 
     const AUTHOR_ORDER = [
       { key: "ronit", name: "רונית לוינשטיין־מלץ" },
@@ -228,82 +305,260 @@
     let data = null;
     let filter = "all";
     let query = "";
+    let regroupTimer = 0;
+    const dirtyGroups = new Set();
 
-    function loadReadSet() {
+    function emptyState() {
+      return { checked: {}, comments: {}, authors: {}, added: [] };
+    }
+
+    let state = emptyState();
+
+    function persist() {
       try {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        const arr = raw ? JSON.parse(raw) : [];
-        return new Set(Array.isArray(arr) ? arr : []);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
       } catch {
-        return new Set();
+        /* Storage can be full or blocked; the page still works for this visit. */
       }
     }
 
-    function saveReadSet(set) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify([...set]));
+    function sanitizeAdded(list) {
+      const out = [];
+      const seen = new Set();
+      for (const book of list) {
+        if (!book || typeof book.id !== "string" || !/^[A-Za-z0-9_-]+$/.test(book.id)) continue;
+        if (typeof book.title !== "string" || !book.title.trim()) continue;
+        if (seen.has(book.id)) continue;
+        seen.add(book.id);
+        out.push({
+          id: book.id,
+          title: book.title.trim(),
+          author: typeof book.author === "string" ? book.author.trim() : "",
+          authorKey: "added",
+          notes: "",
+        });
+      }
+      return out;
     }
 
-    let readSet = loadReadSet();
+    function sanitizeMap(obj, mapValue) {
+      const out = {};
+      if (!obj || typeof obj !== "object" || Array.isArray(obj)) return out;
+      for (const [id, value] of Object.entries(obj)) {
+        if (typeof id !== "string" || !id) continue;
+        const next = mapValue(value);
+        if (next !== undefined) out[id] = next;
+      }
+      return out;
+    }
+
+    function loadState() {
+      const next = emptyState();
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
+            next.checked = sanitizeMap(parsed.checked, (value) => {
+              if (typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value)) return value;
+              if (value == null || value === true) return null;
+              return undefined;
+            });
+            next.comments = sanitizeMap(parsed.comments, (value) =>
+              typeof value === "string" && value ? value : undefined
+            );
+            next.authors = sanitizeMap(parsed.authors, (value) =>
+              typeof value === "string" ? value : undefined
+            );
+            next.added = sanitizeAdded(Array.isArray(parsed.added) ? parsed.added : []);
+            return next;
+          }
+        }
+      } catch {
+        /* Ignore a broken save and try the old checklist. */
+      }
+
+      try {
+        const legacy = JSON.parse(localStorage.getItem(LEGACY_READ_KEY) || "null");
+        if (Array.isArray(legacy)) {
+          for (const id of legacy) {
+            if (typeof id === "string" && id) next.checked[id] = null;
+          }
+        }
+      } catch {
+        /* Leave the checklist empty. */
+      }
+      return next;
+    }
+
+    state = loadState();
+    if (!localStorage.getItem(STORAGE_KEY)) persist();
+
+    function todayISO() {
+      const parts = new Intl.DateTimeFormat("en-GB", {
+        timeZone: "Asia/Jerusalem",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      }).formatToParts(new Date());
+      const pick = (type) => parts.find((part) => part.type === type).value;
+      return `${pick("year")}-${pick("month")}-${pick("day")}`;
+    }
+
+    function formatIsraelDate(iso) {
+      const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || "");
+      if (!match) return "";
+      return `${match[3]}.${match[2]}.${match[1]}`;
+    }
+
+    function normName(value) {
+      return String(value || "")
+        .trim()
+        .replace(/[־–—-]/g, "-")
+        .replace(/\s+/g, " ")
+        .toLowerCase();
+    }
+
+    function allBooks() {
+      const seed = data ? data.books : [];
+      const ids = new Set(seed.map((book) => book.id));
+      const added = state.added.filter((book) => !ids.has(book.id));
+      return [...seed, ...added];
+    }
+
+    function isRead(id) {
+      return Object.prototype.hasOwnProperty.call(state.checked, id);
+    }
+
+    function effectiveAuthor(book) {
+      if (Object.prototype.hasOwnProperty.call(state.authors, book.id)) {
+        return String(state.authors[book.id] ?? "").trim();
+      }
+      return String(book.author || "").trim();
+    }
+
+    function groupOf(book) {
+      const author = effectiveAuthor(book);
+      if (!author) return { key: "__none__", name: "ללא סופר" };
+      const known = AUTHOR_ORDER.find((item) => normName(item.name) === normName(author));
+      if (known) return known;
+      return { key: "custom:" + normName(author), name: author };
+    }
+
+    function commentOf(book) {
+      return state.comments[book.id] || "";
+    }
 
     function matches(book) {
-      const isRead = readSet.has(book.id);
-      if (filter === "read" && !isRead) return false;
-      if (filter === "unread" && isRead) return false;
-      if (!query) return true;
+      const read = isRead(book.id);
+      if (filter === "read" && !read) return false;
+      if (filter === "unread" && read) return false;
       const q = query.trim().toLowerCase();
+      if (!q) return true;
       return (
         book.title.toLowerCase().includes(q) ||
-        book.author.toLowerCase().includes(q) ||
-        (book.notes || "").toLowerCase().includes(q)
+        effectiveAuthor(book).toLowerCase().includes(q) ||
+        (book.notes || "").toLowerCase().includes(q) ||
+        commentOf(book).toLowerCase().includes(q)
       );
     }
 
+    function buildGroups(books) {
+      const buckets = new Map();
+      for (const book of books) {
+        const group = groupOf(book);
+        if (!buckets.has(group.key)) buckets.set(group.key, { key: group.key, name: group.name, books: [] });
+        buckets.get(group.key).books.push(book);
+      }
+      const ordered = [];
+      for (const author of AUTHOR_ORDER) {
+        if (buckets.has(author.key)) ordered.push(buckets.get(author.key));
+      }
+      const custom = [...buckets.values()].filter(
+        (group) => group.key !== "__none__" && !AUTHOR_ORDER.some((author) => author.key === group.key)
+      );
+      custom.sort((a, b) => a.name.localeCompare(b.name, "he"));
+      ordered.push(...custom);
+      if (buckets.has("__none__")) ordered.push(buckets.get("__none__"));
+      return ordered;
+    }
+
     function updateStats() {
-      const total = data.books.length;
-      const read = data.books.filter((b) => readSet.has(b.id)).length;
-      const byAuthor = AUTHOR_ORDER.map(({ key, name }) => {
-        const books = data.books.filter((b) => b.authorKey === key);
-        const r = books.filter((b) => readSet.has(b.id)).length;
-        return { name, n: books.length, r };
-      });
-      document.getElementById("stats").innerHTML = [
-        `<span class="chip"><strong>${read}</strong> / ${total} נקראו</span>`,
-        ...byAuthor.map(
-          (a) =>
-            `<span class="chip">${a.name}: <strong>${a.r}</strong>/${a.n}</span>`
-        ),
-      ].join("");
+      const books = allBooks();
+      const read = books.filter((book) => isRead(book.id)).length;
+      const chips = [`<span class="chip"><strong>${read}</strong> / ${books.length} נקראו</span>`];
+      const groups = buildGroups(books);
+      const knownKeys = new Set(AUTHOR_ORDER.map((author) => author.key));
+      for (const author of AUTHOR_ORDER) {
+        const group = groups.find((item) => item.key === author.key);
+        const list = group ? group.books : [];
+        const authorRead = list.filter((book) => isRead(book.id)).length;
+        chips.push(`<span class="chip">${escapeHtml(author.name)}: <strong>${authorRead}</strong>/${list.length}</span>`);
+      }
+      const others = books.filter((book) => !knownKeys.has(groupOf(book).key));
+      if (others.length) {
+        const othersRead = others.filter((book) => isRead(book.id)).length;
+        chips.push(`<span class="chip">אחרים: <strong>${othersRead}</strong>/${others.length}</span>`);
+      }
+      document.getElementById("stats").innerHTML = chips.join("");
+    }
+
+    function bookCard(book) {
+      const checked = isRead(book.id);
+      const iso = typeof state.checked[book.id] === "string" ? state.checked[book.id] : "";
+      const date = formatIsraelDate(iso);
+      const author = Object.prototype.hasOwnProperty.call(state.authors, book.id)
+        ? String(state.authors[book.id] ?? "")
+        : String(book.author || "");
+      const comment = commentOf(book);
+      const dateLine = checked
+        ? `<div class="checked-on">${date ? `נקרא ב־<time datetime="${iso}">${date}</time>` : "נקרא"}</div>`
+        : "";
+      return `<li class="book${checked ? " read" : ""}" data-id="${escapeHtml(book.id)}">
+        <input class="check" type="checkbox" id="${escapeHtml(book.id)}" data-id="${escapeHtml(book.id)}" ${checked ? "checked" : ""} aria-label="נקרא: ${escapeHtml(book.title)}" />
+        <div class="book-body">
+          <label class="title-label" for="${escapeHtml(book.id)}">
+            <div class="title">${escapeHtml(book.title)}</div>
+          </label>
+          <label class="field">
+            <span>סופר</span>
+            <input class="text-input author-input" data-id="${escapeHtml(book.id)}" data-group="${escapeHtml(groupOf(book).key)}" type="text" value="${escapeHtml(author)}" placeholder="סופר (לא חובה)" autocomplete="off" aria-label="סופר: ${escapeHtml(book.title)}" />
+          </label>
+          ${book.notes ? `<div class="notes">${escapeHtml(book.notes)}</div>` : ""}
+          ${dateLine}
+          <label class="field">
+            <span>מחשבות</span>
+            <textarea class="comment" data-id="${escapeHtml(book.id)}" rows="2" placeholder="הערות ומחשבות על הספר…" aria-label="מחשבות על ${escapeHtml(book.title)}">${escapeHtml(comment)}</textarea>
+          </label>
+        </div>
+      </li>`;
+    }
+
+    function syncHeaderHeight() {
+      const header = document.querySelector("header");
+      if (!header) return;
+      document.documentElement.style.setProperty("--header-h", `${header.offsetHeight}px`);
     }
 
     function render() {
+      clearTimeout(regroupTimer);
+      dirtyGroups.clear();
+      syncHeaderHeight();
       const main = document.getElementById("main");
       const empty = document.getElementById("empty");
-      let any = false;
+      const groups = buildGroups(allBooks());
       const parts = [];
+      let any = false;
 
-      for (const { key, name } of AUTHOR_ORDER) {
-        const books = data.books.filter((b) => b.authorKey === key && matches(b));
-        if (!books.length) continue;
+      for (const group of groups) {
+        const visible = group.books.filter(matches);
+        if (!visible.length) continue;
         any = true;
-        const readCount = data.books.filter(
-          (b) => b.authorKey === key && readSet.has(b.id)
-        ).length;
-        const totalAuthor = data.books.filter((b) => b.authorKey === key).length;
-        parts.push(`<section class="author-block" data-author="${key}">
-          <h2>${name} <span>${readCount}/${totalAuthor} · מוצגים ${books.length}</span></h2>
+        const readCount = group.books.filter((book) => isRead(book.id)).length;
+        parts.push(`<section class="author-block" data-author="${escapeHtml(group.key)}">
+          <h2>${escapeHtml(group.name)} <span>${readCount}/${group.books.length} · מוצגים ${visible.length}</span></h2>
           <ul class="books">
-            ${books
-              .map((b) => {
-                const checked = readSet.has(b.id);
-                return `<li class="book${checked ? " read" : ""}" data-id="${b.id}">
-                  <input class="check" type="checkbox" id="${b.id}" ${checked ? "checked" : ""} aria-label="נקרא: ${b.title}" />
-                  <label for="${b.id}">
-                    <div class="title">${escapeHtml(b.title)}</div>
-                    ${b.notes ? `<div class="notes">${escapeHtml(b.notes)}</div>` : ""}
-                  </label>
-                </li>`;
-              })
-              .join("")}
+            ${visible.map(bookCard).join("")}
           </ul>
         </section>`);
       }
@@ -311,59 +566,155 @@
       main.innerHTML = parts.join("");
       empty.classList.toggle("hidden", any);
       updateStats();
-
-      main.querySelectorAll(".check").forEach((el) => {
-        el.addEventListener("change", () => {
-          if (el.checked) readSet.add(el.id);
-          else readSet.delete(el.id);
-          saveReadSet(readSet);
-          const li = el.closest(".book");
-          if (li) li.classList.toggle("read", el.checked);
-          // Re-render if current filter would hide this item
-          if (
-            (filter === "unread" && el.checked) ||
-            (filter === "read" && !el.checked)
-          ) {
-            render();
-          } else {
-            updateStats();
-            // refresh author counters in headings without full re-filter mess
-            render();
-          }
-        });
-      });
     }
 
-    function escapeHtml(s) {
-      return String(s)
+    function scheduleRegroup() {
+      if (!dirtyGroups.size) return;
+      clearTimeout(regroupTimer);
+      regroupTimer = setTimeout(() => {
+        const active = document.activeElement;
+        const editing = active && active.closest && active.closest("#main") &&
+          (active.classList.contains("comment") || active.classList.contains("author-input"));
+        if (editing) return;
+        const y = window.scrollY;
+        render();
+        window.scrollTo(0, y);
+      }, 0);
+    }
+
+    function newId() {
+      if (window.crypto && typeof crypto.randomUUID === "function") return "added-" + crypto.randomUUID();
+      return "added-" + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+    }
+
+    function escapeHtml(value) {
+      return String(value)
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;");
     }
 
+    function showAddMsg(text, kind) {
+      const msg = document.getElementById("add-msg");
+      msg.textContent = text;
+      msg.classList.remove("hidden", "error", "ok");
+      msg.classList.add(kind);
+    }
+
+    const main = document.getElementById("main");
+
+    main.addEventListener("change", (event) => {
+      const el = event.target;
+      if (!el.classList.contains("check")) return;
+      const id = el.dataset.id;
+      if (!el.checked) {
+        if (!window.confirm(UNCHECK_CONFIRM)) {
+          el.checked = true;
+          return;
+        }
+        delete state.checked[id];
+      } else {
+        state.checked[id] = todayISO();
+      }
+      persist();
+      render();
+    });
+
+    main.addEventListener("input", (event) => {
+      const el = event.target;
+      const id = el.dataset.id;
+      if (!id) return;
+      if (el.classList.contains("comment")) {
+        if (el.value) state.comments[id] = el.value;
+        else delete state.comments[id];
+        persist();
+      } else if (el.classList.contains("author-input")) {
+        state.authors[id] = el.value;
+        persist();
+      }
+    });
+
+    main.addEventListener("focusout", (event) => {
+      const el = event.target;
+      if (el.classList.contains("author-input")) {
+        const id = el.dataset.id;
+        const book = allBooks().find((item) => item.id === id);
+        if (!book) return;
+        const trimmed = el.value.trim();
+        el.value = trimmed;
+        if (trimmed === String(book.author || "").trim()) delete state.authors[id];
+        else state.authors[id] = trimmed;
+        persist();
+        if (groupOf(book).key !== el.dataset.group) {
+          dirtyGroups.add(id);
+          scheduleRegroup();
+        }
+      } else if (el.classList.contains("comment") && dirtyGroups.size) {
+        scheduleRegroup();
+      }
+    });
+
     document.querySelectorAll(".filters button").forEach((btn) => {
       btn.addEventListener("click", () => {
         filter = btn.dataset.filter;
-        document.querySelectorAll(".filters button").forEach((b) =>
-          b.setAttribute("aria-pressed", String(b === btn))
+        document.querySelectorAll(".filters button").forEach((item) =>
+          item.setAttribute("aria-pressed", String(item === btn))
         );
         render();
       });
     });
 
-    document.getElementById("search").addEventListener("input", (e) => {
-      query = e.target.value;
+    document.getElementById("search").addEventListener("input", (event) => {
+      query = event.target.value;
       render();
     });
 
+    window.addEventListener("resize", syncHeaderHeight);
+
+    document.getElementById("add-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (!data) return;
+      const titleEl = document.getElementById("new-title");
+      const authorEl = document.getElementById("new-author");
+      const title = titleEl.value.trim();
+      const author = authorEl.value.trim();
+      if (!title) {
+        showAddMsg("צריך למלא שם ספר.", "error");
+        titleEl.focus();
+        return;
+      }
+
+      const book = {
+        id: newId(),
+        title,
+        author,
+        authorKey: "added",
+        notes: "",
+      };
+      state.added.push(book);
+      persist();
+      titleEl.value = "";
+      authorEl.value = "";
+
+      const visible = matches(book);
+      showAddMsg(
+        visible ? "הספר נוסף." : "הספר נוסף, אבל הוא מוסתר בגלל החיפוש או הסינון.",
+        "ok"
+      );
+      render();
+      const card = document.querySelector(`.book[data-id="${CSS.escape(book.id)}"]`);
+      if (card) card.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+
     fetch("books.json")
-      .then((r) => {
-        if (!r.ok) throw new Error("books.json missing");
-        return r.json();
+      .then((response) => {
+        if (!response.ok) throw new Error("books.json missing");
+        return response.json();
       })
       .then((json) => {
         data = json;
+        document.getElementById("add-button").disabled = false;
         render();
       })
       .catch((err) => {
