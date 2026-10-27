@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>ספרים ליוסף</title>
+  <style>
+    :root {
+      --bg: #f6f1e8;
+      --card: #fffdf8;
+      --ink: #1c1917;
+      --muted: #78716c;
+      --accent: #0f766e;
+      --accent-soft: #ccfbf1;
+      --border: #e7e0d4;
+      --read: #166534;
+      --shadow: 0 1px 2px rgba(28, 25, 23, 0.06), 0 8px 24px rgba(28, 25, 23, 0.06);
+      --radius: 14px;
+      --safe-b: env(safe-area-inset-bottom, 0px);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Heebo", "Rubik", "Arial Hebrew", Arial, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 100% -10%, #dbeafe 0%, transparent 50%),
+        radial-gradient(900px 500px at -10% 100%, #fde68a 0%, transparent 45%),
+        var(--bg);
+      color: var(--ink);
+      min-height: 100dvh;
+      line-height: 1.45;
+    }
+    .wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 1rem 1rem calc(1.5rem + var(--safe-b));
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 0.85rem 0 0.75rem;
+      margin: 0 -0.25rem;
+      padding-inline: 0.25rem;
+      border-bottom: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+    }
+    h1 {
+      margin: 0 0 0.15rem;
+      font-size: 1.55rem;
+      letter-spacing: -0.02em;
+    }
+    .sub {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin: 0 0 0.85rem;
+    }
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.25rem 0.7rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .chip strong { color: var(--ink); font-weight: 600; }
+    .controls {
+      display: grid;
+      gap: 0.55rem;
+    }
+    .search {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.75rem 0.9rem;
+      font-size: 1rem;
+      background: var(--card);
+      color: var(--ink);
+      outline: none;
+      box-shadow: var(--shadow);
+    }
+    .search:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+    .filters {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+    .filters button {
+      appearance: none;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 0.45rem 0.85rem;
+      font-size: 0.9rem;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .filters button[aria-pressed="true"] {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .author-block {
+      margin-top: 1.35rem;
+    }
+    .author-block h2 {
+      margin: 0 0 0.65rem;
+      font-size: 1.15rem;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    .author-block h2 span {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--muted);
+    }
+    ul.books {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 0.5rem;
+    }
+    .book {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.75rem;
+      align-items: start;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.8rem 0.9rem;
+      box-shadow: var(--shadow);
+      transition: opacity 0.15s ease, border-color 0.15s ease;
+    }
+    .book.read {
+      border-color: color-mix(in srgb, var(--read) 35%, var(--border));
+      background: color-mix(in srgb, #dcfce7 35%, var(--card));
+    }
+    .book label {
+      display: block;
+      cursor: pointer;
+    }
+    .book .title {
+      font-weight: 600;
+      font-size: 1.02rem;
+    }
+    .book .notes {
+      margin-top: 0.2rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .check {
+      width: 1.35rem;
+      height: 1.35rem;
+      margin-top: 0.15rem;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+    .empty {
+      text-align: center;
+      color: var(--muted);
+      padding: 2.5rem 1rem;
+      background: color-mix(in srgb, var(--card) 70%, transparent);
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+      margin-top: 1.25rem;
+    }
+    footer {
+      margin-top: 2rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-align: center;
+    }
+    footer a { color: var(--accent); }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>ספרים ליוסף</h1>
+      <p class="sub">סמנו ספרים שכבר נקראו · נשמר במכשיר הזה</p>
+      <div class="stats" id="stats"></div>
+      <div class="controls">
+        <input class="search" id="search" type="search" placeholder="חיפוש לפי שם ספר או סופר…" autocomplete="off" />
+        <div class="filters" role="group" aria-label="סינון">
+          <button type="button" data-filter="all" aria-pressed="true">הכול</button>
+          <button type="button" data-filter="unread" aria-pressed="false">עדיין לא נקרא</button>
+          <button type="button" data-filter="read" aria-pressed="false">נקרא</button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main"></main>
+    <p class="empty hidden" id="empty">אין ספרים שמתאימים לחיפוש או לסינון.</p>
+    <footer>
+      מקורות: <a href="https://www.helt.co.il/12_6.htm" target="_blank" rel="noopener">helt.co.il</a>,
+      <a href="https://he.wikipedia.org/wiki/%D7%A9%D7%9E%D7%95%D7%90%D7%9C_%D7%90%D7%A8%D7%92%D7%9E%D7%9F" target="_blank" rel="noopener">ויקיפדיה · ארגמן</a>,
+      <a href="https://he.wikipedia.org/wiki/%D7%90%D7%95%D7%A8%D7%94_%D7%9E%D7%95%D7%A8%D7%92" target="_blank" rel="noopener">ויקיפדיה · מורג</a>
+      · רק כותרים שאומתו ממקורות אלה
+    </footer>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "yosef-books-read-v1";
+
+    const AUTHOR_ORDER = [
+      { key: "ronit", name: "רונית לוינשטיין־מלץ" },
+      { key: "argaman", name: "שמואל ארגמן" },
+      { key: "morag", name: "אורה מורג" },
+    ];
+
+    let data = null;
+    let filter = "all";
+    let query = "";
+
+    function loadReadSet() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        const arr = raw ? JSON.parse(raw) : [];
+        return new Set(Array.isArray(arr) ? arr : []);
+      } catch {
+        return new Set();
+      }
+    }
+
+    function saveReadSet(set) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify([...set]));
+    }
+
+    let readSet = loadReadSet();
+
+    function matches(book) {
+      const isRead = readSet.has(book.id);
+      if (filter === "read" && !isRead) return false;
+      if (filter === "unread" && isRead) return false;
+      if (!query) return true;
+      const q = query.trim().toLowerCase();
+      return (
+        book.title.toLowerCase().includes(q) ||
+        book.author.toLowerCase().includes(q) ||
+        (book.notes || "").toLowerCase().includes(q)
+      );
+    }
+
+    function updateStats() {
+      const total = data.books.length;
+      const read = data.books.filter((b) => readSet.has(b.id)).length;
+      const byAuthor = AUTHOR_ORDER.map(({ key, name }) => {
+        const books = data.books.filter((b) => b.authorKey === key);
+        const r = books.filter((b) => readSet.has(b.id)).length;
+        return { name, n: books.length, r };
+      });
+      document.getElementById("stats").innerHTML = [
+        `<span class="chip"><strong>${read}</strong> / ${total} נקראו</span>`,
+        ...byAuthor.map(
+          (a) =>
+            `<span class="chip">${a.name}: <strong>${a.r}</strong>/${a.n}</span>`
+        ),
+      ].join("");
+    }
+
+    function render() {
+      const main = document.getElementById("main");
+      const empty = document.getElementById("empty");
+      let any = false;
+      const parts = [];
+
+      for (const { key, name } of AUTHOR_ORDER) {
+        const books = data.books.filter((b) => b.authorKey === key && matches(b));
+        if (!books.length) continue;
+        any = true;
+        const readCount = data.books.filter(
+          (b) => b.authorKey === key && readSet.has(b.id)
+        ).length;
+        const totalAuthor = data.books.filter((b) => b.authorKey === key).length;
+        parts.push(`<section class="author-block" data-author="${key}">
+          <h2>${name} <span>${readCount}/${totalAuthor} · מוצגים ${books.length}</span></h2>
+          <ul class="books">
+            ${books
+              .map((b) => {
+                const checked = readSet.has(b.id);
+                return `<li class="book${checked ? " read" : ""}" data-id="${b.id}">
+                  <input class="check" type="checkbox" id="${b.id}" ${checked ? "checked" : ""} aria-label="נקרא: ${b.title}" />
+                  <label for="${b.id}">
+                    <div class="title">${escapeHtml(b.title)}</div>
+                    ${b.notes ? `<div class="notes">${escapeHtml(b.notes)}</div>` : ""}
+                  </label>
+                </li>`;
+              })
+              .join("")}
+          </ul>
+        </section>`);
+      }
+
+      main.innerHTML = parts.join("");
+      empty.classList.toggle("hidden", any);
+      updateStats();
+
+      main.querySelectorAll(".check").forEach((el) => {
+        el.addEventListener("change", () => {
+          if (el.checked) readSet.add(el.id);
+          else readSet.delete(el.id);
+          saveReadSet(readSet);
+          const li = el.closest(".book");
+          if (li) li.classList.toggle("read", el.checked);
+          // Re-render if current filter would hide this item
+          if (
+            (filter === "unread" && el.checked) ||
+            (filter === "read" && !el.checked)
+          ) {
+            render();
+          } else {
+            updateStats();
+            // refresh author counters in headings without full re-filter mess
+            render();
+          }
+        });
+      });
+    }
+
+    function escapeHtml(s) {
+      return String(s)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    document.querySelectorAll(".filters button").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        filter = btn.dataset.filter;
+        document.querySelectorAll(".filters button").forEach((b) =>
+          b.setAttribute("aria-pressed", String(b === btn))
+        );
+        render();
+      });
+    });
+
+    document.getElementById("search").addEventListener("input", (e) => {
+      query = e.target.value;
+      render();
+    });
+
+    fetch("books.json")
+      .then((r) => {
+        if (!r.ok) throw new Error("books.json missing");
+        return r.json();
+      })
+      .then((json) => {
+        data = json;
+        render();
+      })
+      .catch((err) => {
+        document.getElementById("main").innerHTML =
+          `<p class="empty">שגיאה בטעינת הרשימה: ${escapeHtml(err.message)}</p>`;
+      });
+  </script>
+</body>
+</html>

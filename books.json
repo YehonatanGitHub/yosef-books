@@ -1,0 +1,585 @@
+{
+  "title": "ספרים ליוסף",
+  "generated": "2026-10-26",
+  "sources": {
+    "ronit": "https://www.helt.co.il/12_6.htm",
+    "argaman": "https://he.wikipedia.org/wiki/שמואל_ארגמן",
+    "morag": "https://he.wikipedia.org/wiki/אורה_מורג"
+  },
+  "excluded": {
+    "ronit": [
+      "Escape in time (English translation)",
+      "נשמה לעם עלייה (unclear audience / not clearly children's fiction)"
+    ],
+    "argaman": [
+      "Adult titles from Wikipedia למבוגרים section"
+    ],
+    "morag": [
+      "מאה תפוחים חדשים כולל מע״מ (adult)",
+      "שמלת הכלה המכורה (adult)",
+      "היא עוד תגיע להוליווד (autobiography)",
+      "translations of Milne/Kipling/Lear"
+    ]
+  },
+  "counts": {
+    "ronit": 11,
+    "argaman": 25,
+    "morag": 43,
+    "total": 79
+  },
+  "books": [
+    {
+      "title": "תריסים ירוקים פתוחים",
+      "author": "רונית לוינשטיין־מלץ",
+      "authorKey": "ronit",
+      "notes": "סדרת מסע בעקבות שמי · 2005 · helt.co.il",
+      "id": "ronit-000"
+    },
+    {
+      "title": "נס של אהבה",
+      "author": "רונית לוינשטיין־מלץ",
+      "authorKey": "ronit",
+      "notes": "סדרת מסע בעקבות שמי · 2006 · פרס יד ושם · helt.co.il",
+      "id": "ronit-001"
+    },
+    {
+      "title": "מעבר לפינה",
+      "author": "רונית לוינשטיין־מלץ",
+      "authorKey": "ronit",
+      "notes": "סדרת מסע בעקבות שמי · 2007 · helt.co.il",
+      "id": "ronit-002"
+    },
+    {
+      "title": "בין ים לים",
+      "author": "רונית לוינשטיין־מלץ",
+      "authorKey": "ronit",
+      "notes": "סדרת מסע בעקבות שמי · 2008 · helt.co.il",
+      "id": "ronit-003"
+    },
+    {
+      "title": "13 אדום",
+      "author": "רונית לוינשטיין־מלץ",
+      "authorKey": "ronit",
+      "notes": "סדרת מסע בעקבות שמי · 2011 · helt.co.il",
+      "id": "ronit-004"
+    },
+    {
+      "title": "מבצע אחים",
+      "author": "רונית לוינשטיין־מלץ",
+      "authorKey": "ronit",
+      "notes": "סדרת מסע בעקבות שמי · 2012 · helt.co.il",
+      "id": "ronit-005"
+    },
+    {
+      "title": "הזדמנות לעבר חדש",
+      "author": "רונית לוינשטיין־מלץ",
+      "authorKey": "ronit",
+      "notes": "סדרת מסע בעקבות שמי · 2014 · helt.co.il",
+      "id": "ronit-006"
+    },
+    {
+      "title": "מסע בעקבות שמי – הספר האחרון",
+      "author": "רונית לוינשטיין־מלץ",
+      "authorKey": "ronit",
+      "notes": "עם בת־שבע סדן · 2019 · helt.co.il",
+      "id": "ronit-007"
+    },
+    {
+      "title": "סודות בירושלים: שקט, מצלמים",
+      "author": "רונית לוינשטיין־מלץ",
+      "authorKey": "ronit",
+      "notes": "סדרת סודות בירושלים · 2013 · helt.co.il",
+      "id": "ronit-008"
+    },
+    {
+      "title": "סודות בירושלים 2: הדבר הכי גדול בעולם",
+      "author": "רונית לוינשטיין־מלץ",
+      "authorKey": "ronit",
+      "notes": "סדרת סודות בירושלים · 2015 · helt.co.il",
+      "id": "ronit-009"
+    },
+    {
+      "title": "וקראתם דרור",
+      "author": "רונית לוינשטיין־מלץ",
+      "authorKey": "ronit",
+      "notes": "סיפורו של אל״מ דרור ויינברג · 2010 · helt.co.il",
+      "id": "ronit-010"
+    },
+    {
+      "title": "אבא גיבור הרוח",
+      "author": "שמואל ארגמן",
+      "authorKey": "argaman",
+      "notes": "רשימת ילדים · ויקיפדיה העברית",
+      "id": "argaman-011"
+    },
+    {
+      "title": "אי המסתורין",
+      "author": "שמואל ארגמן",
+      "authorKey": "argaman",
+      "notes": "רשימת ילדים · ויקיפדיה העברית",
+      "id": "argaman-012"
+    },
+    {
+      "title": "אל גוב האריות",
+      "author": "שמואל ארגמן",
+      "authorKey": "argaman",
+      "notes": "רשימת ילדים · ויקיפדיה העברית",
+      "id": "argaman-013"
+    },
+    {
+      "title": "אל מול פני הסכנה",
+      "author": "שמואל ארגמן",
+      "authorKey": "argaman",
+      "notes": "רשימת ילדים · ויקיפדיה העברית",
+      "id": "argaman-014"
+    },
+    {
+      "title": "בדבקות ובגבורה",
+      "author": "שמואל ארגמן",
+      "authorKey": "argaman",
+      "notes": "רשימת ילדים · ויקיפדיה העברית",
+      "id": "argaman-015"
+    },
+    {
+      "title": "בודדים בלב ים",
+      "author": "שמואל ארגמן",
+      "authorKey": "argaman",
+      "notes": "רשימת ילדים · ויקיפדיה העברית",
+      "id": "argaman-016"
+    },
+    {
+      "title": "בין חומות המבצר",
+      "author": "שמואל ארגמן",
+      "authorKey": "argaman",
+      "notes": "על מהר״ם מרוטנבורג והרא״ש · ויקיפדיה",
+      "id": "argaman-017"
+    },
+    {
+      "title": "בלוע הארי",
+      "author": "שמואל ארגמן",
+      "authorKey": "argaman",
+      "notes": "רשימת ילדים · ויקיפדיה העברית",
+      "id": "argaman-018"
+    },
+    {
+      "title": "במשברי הים",
+      "author": "שמואל ארגמן",
+      "authorKey": "argaman",
+      "notes": "רשימת ילדים · ויקיפדיה העברית",
+      "id": "argaman-019"
+    },
+    {
+      "title": "בעקבות ראשי האינקוויזיציה",
+      "author": "שמואל ארגמן",
+      "authorKey": "argaman",
+      "notes": "רשימת ילדים · ויקיפדיה העברית",
+      "id": "argaman-020"
+    },
+    {
+      "title": "החטיפה ובמרתפי האינקוויזיציה",
+      "author": "שמואל ארגמן",
+      "authorKey": "argaman",
+      "notes": "שני סיפורים · ויקיפדיה",
+      "id": "argaman-021"
+    },
+    {
+      "title": "הילדה שברחה מהמנזר",
+      "author": "שמואל ארגמן",
+      "authorKey": "argaman",
+      "notes": "רשימת ילדים · ויקיפדיה העברית",
+      "id": "argaman-022"
+    },
+    {
+      "title": "הנועזים בעלטה",
+      "author": "שמואל ארגמן",
+      "authorKey": "argaman",
+      "notes": "רשימת ילדים · ויקיפדיה העברית",
+      "id": "argaman-023"
+    },
+    {
+      "title": "הנחיתה על הקרח",
+      "author": "שמואל ארגמן",
+      "authorKey": "argaman",
+      "notes": "מופיע גם ברשימת מבוגרים בוויקיפדיה — נכלל כפי שסווג לילדים",
+      "id": "argaman-024"
+    },
+    {
+      "title": "הצוללת הפליגה בחצות",
+      "author": "שמואל ארגמן",
+      "authorKey": "argaman",
+      "notes": "רשימת ילדים · ויקיפדיה העברית",
+      "id": "argaman-025"
+    },
+    {
+      "title": "הצניחה הגורלית",
+      "author": "שמואל ארגמן",
+      "authorKey": "argaman",
+      "notes": "רשימת ילדים · ויקיפדיה העברית",
+      "id": "argaman-026"
+    },
+    {
+      "title": "זהות עלומה",
+      "author": "שמואל ארגמן",
+      "authorKey": "argaman",
+      "notes": "מופיע גם ברשימת מבוגרים בוויקיפדיה — נכלל כפי שסווג לילדים",
+      "id": "argaman-027"
+    },
+    {
+      "title": "למרות הכל",
+      "author": "שמואל ארגמן",
+      "authorKey": "argaman",
+      "notes": "רשימת ילדים · ויקיפדיה העברית",
+      "id": "argaman-028"
+    },
+    {
+      "title": "מבצע חידקל",
+      "author": "שמואל ארגמן",
+      "authorKey": "argaman",
+      "notes": "רשימת ילדים · ויקיפדיה העברית",
+      "id": "argaman-029"
+    },
+    {
+      "title": "מסתורין בסהרה",
+      "author": "שמואל ארגמן",
+      "authorKey": "argaman",
+      "notes": "רשימת ילדים · ויקיפדיה העברית",
+      "id": "argaman-030"
+    },
+    {
+      "title": "נס במבצר",
+      "author": "שמואל ארגמן",
+      "authorKey": "argaman",
+      "notes": "רשימת ילדים · ויקיפדיה העברית",
+      "id": "argaman-031"
+    },
+    {
+      "title": "עולמנו (כרך א)",
+      "author": "שמואל ארגמן",
+      "authorKey": "argaman",
+      "notes": "סדרת עולמנו · ויקיפדיה (2 כרכים)",
+      "id": "argaman-032"
+    },
+    {
+      "title": "עולמנו (כרך ב)",
+      "author": "שמואל ארגמן",
+      "authorKey": "argaman",
+      "notes": "סדרת עולמנו · ויקיפדיה (2 כרכים)",
+      "id": "argaman-033"
+    },
+    {
+      "title": "עקבות באי",
+      "author": "שמואל ארגמן",
+      "authorKey": "argaman",
+      "notes": "רשימת ילדים · ויקיפדיה העברית",
+      "id": "argaman-034"
+    },
+    {
+      "title": "תעלומה בנמל התעופה",
+      "author": "שמואל ארגמן",
+      "authorKey": "argaman",
+      "notes": "גם: בציפורני הפידאיון · ויקיפדיה",
+      "id": "argaman-035"
+    },
+    {
+      "title": "תומר כ״ץ ילד מומלץ",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "1972 · ויקיפדיה",
+      "id": "morag-036"
+    },
+    {
+      "title": "ילד זה לא מה שהיה פעם",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "1982 · ויקיפדיה",
+      "id": "morag-037"
+    },
+    {
+      "title": "לגמרי לבד ברובע היהודי",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "1984 · ויקיפדיה",
+      "id": "morag-038"
+    },
+    {
+      "title": "לאמא יש חבר חדש",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "1987 · ויקיפדיה",
+      "id": "morag-039"
+    },
+    {
+      "title": "קשה להיות מכשפה",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "1989 · ויקיפדיה",
+      "id": "morag-040"
+    },
+    {
+      "title": "סיפורי רחוב מיכל ובכלל",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "1991 · ויקיפדיה",
+      "id": "morag-041"
+    },
+    {
+      "title": "יום אמא יום אבא",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "1993 · ויקיפדיה",
+      "id": "morag-042"
+    },
+    {
+      "title": "מישולי או סבתא לא מגרשים!",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "1994 · ויקיפדיה (יש גם מהדורה: סבתא לא מגרשים)",
+      "id": "morag-043"
+    },
+    {
+      "title": "תיבת המכתבים הכי מקושקשת ברחוב",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "1997 · ויקיפדיה",
+      "id": "morag-044"
+    },
+    {
+      "title": "אדם חוה ופרי עץ הדעת",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "1998 · ויקיפדיה",
+      "id": "morag-045"
+    },
+    {
+      "title": "לנצח את המצח",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "1998 · ויקיפדיה",
+      "id": "morag-046"
+    },
+    {
+      "title": "שישה ימי בריאה",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "1998 · ויקיפדיה",
+      "id": "morag-047"
+    },
+    {
+      "title": "מעשה בצב כלב ושני חתולים",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "ויקיפדיה",
+      "id": "morag-048"
+    },
+    {
+      "title": "מסתדרים לבד בבית",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "1999 · ויקיפדיה",
+      "id": "morag-049"
+    },
+    {
+      "title": "לפעמים יום־הולדת זה דווקא יום נעים",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "1999 · ויקיפדיה",
+      "id": "morag-050"
+    },
+    {
+      "title": "המרד נגד האונייה אפרודיטה",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "2001 · ויקיפדיה",
+      "id": "morag-051"
+    },
+    {
+      "title": "קרן כובשת שער",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "2001 · ויקיפדיה",
+      "id": "morag-052"
+    },
+    {
+      "title": "חפץ חשוד בגן העיר",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "2001 · ויקיפדיה",
+      "id": "morag-053"
+    },
+    {
+      "title": "לנצח על המצח",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "ספורו של קין · 2004 · ויקיפדיה",
+      "id": "morag-054"
+    },
+    {
+      "title": "הנכד שהלך לדוג",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "ויקיפדיה",
+      "id": "morag-055"
+    },
+    {
+      "title": "מולי החברים שלי ואני",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "ויקיפדיה",
+      "id": "morag-056"
+    },
+    {
+      "title": "החטיפה מן המנזר",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "סדרת מתח היסטורית · 2000 · ויקיפדיה",
+      "id": "morag-057"
+    },
+    {
+      "title": "הבריחה אל שום־מקום",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "סדרת מתח היסטורית · 2001 · ויקיפדיה",
+      "id": "morag-058"
+    },
+    {
+      "title": "בעקבות הבית הנעלם",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "סדרת מתח היסטורית · הרצל · פרס זאב · 2004 · ויקיפדיה",
+      "id": "morag-059"
+    },
+    {
+      "title": "המרגל שבא מן הים",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "סדרת מתח היסטורית · פרס אקו״ם · 2005 · ויקיפדיה",
+      "id": "morag-060"
+    },
+    {
+      "title": "אש על פני המים",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "סדרת מתח היסטורית · יום הכיפורים · 2006 · ויקיפדיה",
+      "id": "morag-061"
+    },
+    {
+      "title": "אניגמה – סוד הצופן הגורלי",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "סדרת מתח היסטורית · 2007 · ויקיפדיה",
+      "id": "morag-062"
+    },
+    {
+      "title": "הפנים שפרצו מהדף",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "סדרת מתח היסטורית · 2007 · ויקיפדיה",
+      "id": "morag-063"
+    },
+    {
+      "title": "המירוץ הסודי אל הפצצה",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "סדרת מתח היסטורית · 2008 · ויקיפדיה",
+      "id": "morag-064"
+    },
+    {
+      "title": "פרשת מעטפות הנפץ",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "סדרת מתח היסטורית · 2009 · ויקיפדיה",
+      "id": "morag-065"
+    },
+    {
+      "title": "בעקבות מפות המדבר",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "סדרת מתח היסטורית · ניל״י · 2010 · ויקיפדיה",
+      "id": "morag-066"
+    },
+    {
+      "title": "השוד הנועז בלב ים",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "סדרת מתח היסטורית · אוניית הלינו · 2011 · ויקיפדיה",
+      "id": "morag-067"
+    },
+    {
+      "title": "בחזרה אל הבונקר",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "סדרת מתח היסטורית · 2012 · ויקיפדיה",
+      "id": "morag-068"
+    },
+    {
+      "title": "חפרפרת במחתרת",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "סדרת מתח היסטורית · 2013 · ויקיפדיה",
+      "id": "morag-069"
+    },
+    {
+      "title": "האניגמה ב״מבצע קציצה״",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "סדרת מתח היסטורית · 2014 · ויקיפדיה",
+      "id": "morag-070"
+    },
+    {
+      "title": "בלב הגבעה המסתורית",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "סדרת מתח היסטורית · 2015 · ויקיפדיה",
+      "id": "morag-071"
+    },
+    {
+      "title": "שלוש יריות בכיכר",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "סדרת מתח היסטורית · רצח רבין · 2016 · ויקיפדיה",
+      "id": "morag-072"
+    },
+    {
+      "title": "55 דקות באנטבה",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "סדרת מתח היסטורית · 2017 · ויקיפדיה",
+      "id": "morag-073"
+    },
+    {
+      "title": "היהלום המריא עם שחר",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "סדרת מתח היסטורית · 2018 · ויקיפדיה",
+      "id": "morag-074"
+    },
+    {
+      "title": "במנוסה מציפורני העיט",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "סדרת מתח היסטורית · 2019 · ויקיפדיה",
+      "id": "morag-075"
+    },
+    {
+      "title": "המרגל מהקומה הרביעית",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "סדרת מתח היסטורית · אלי כהן · 2020 · ויקיפדיה",
+      "id": "morag-076"
+    },
+    {
+      "title": "בעקבות הנסיך האדום",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "סדרת מתח היסטורית · מינכן · 2022 · ויקיפדיה",
+      "id": "morag-077"
+    },
+    {
+      "title": "לווייני ריגול בשמי החידקל",
+      "author": "אורה מורג",
+      "authorKey": "morag",
+      "notes": "סדרת מתח היסטורית · 2023 · ויקיפדיה",
+      "id": "morag-078"
+    }
+  ]
+}
